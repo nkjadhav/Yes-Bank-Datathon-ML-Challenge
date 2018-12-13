@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": "assist"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles [ \"C:\\\\Users\\\\Nilkanth Jadhav\\\\Desktop\\\\YesBank\\\\Yes_Bank_Training.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"nfs:\\\\C:\\\\Users\\\\Nilkanth Jadhav\\\\Desktop\\\\YesBank\\\\Yes_Bank_Training.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"nfs:\\\\C:\\\\Users\\\\Nilkanth Jadhav\\\\Desktop\\\\YesBank\\\\Yes_Bank_Training.csv\"]\n  destination_frame: \"Yes_Bank_Training.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 18\n  single_quotes: false\n  column_names: [\"serial_number\",\"age_in_years\",\"job_description\",\"marital_status\",\"education_details\",\"has_default\",\"balance_in_account\",\"housing_status\",\"previous_loan\",\"phone_type\",\"date\",\"month_of_year\",\"call_duration\",\"campaign_contacts\",\"days_passed\",\"previous_contact\",\"poutcome_of_campaign\",\"outcome\"]\n  column_types: [\"Numeric\",\"Numeric\",\"Enum\",\"Enum\",\"Enum\",\"Enum\",\"Numeric\",\"Enum\",\"Enum\",\"Enum\",\"Numeric\",\"Enum\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Enum\",\"Enum\"]\n  delete_on_done: true\n  check_header: 1\n  chunk_size: 173117"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"Yes_Bank_Training.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "changeColumnType frame: \"Yes_Bank_Training.hex\", column: \"date\", type: 'enum'"
+    },
+    {
+      "type": "cs",
+      "input": "assist buildModel, null, training_frame: \"Yes_Bank_Training.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "buildModel 'gbm', {\"model_id\":\"gbm-43c4eaef-6aeb-4a7a-b6b3-8121ad087d25\",\"training_frame\":\"Yes_Bank_Training.hex\",\"nfolds\":0,\"response_column\":\"outcome\",\"ignored_columns\":[\"serial_number\",\"marital_status\",\"has_default\",\"housing_status\",\"previous_loan\",\"phone_type\",\"campaign_contacts\",\"days_passed\",\"previous_contact\",\"poutcome_of_campaign\"],\"ignore_const_cols\":true,\"ntrees\":\"10000\",\"max_depth\":\"6\",\"min_rows\":10,\"nbins\":\"10\",\"seed\":-1,\"sample_rate\":1,\"col_sample_rate\":1,\"score_each_iteration\":false,\"score_tree_interval\":0,\"balance_classes\":true,\"nbins_top_level\":1024,\"nbins_cats\":1024,\"r2_stopping\":1.7976931348623157e+308,\"stopping_rounds\":0,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":0.001,\"max_runtime_secs\":0,\"learn_rate_annealing\":1,\"distribution\":\"AUTO\",\"huber_alpha\":0.9,\"checkpoint\":\"\",\"col_sample_rate_per_tree\":1,\"min_split_improvement\":0.00001,\"histogram_type\":\"AUTO\",\"categorical_encoding\":\"AUTO\",\"custom_metric_func\":\"\",\"class_sampling_factors\":[],\"max_after_balance_size\":5,\"build_tree_one_node\":false,\"sample_rate_per_class\":[],\"col_sample_rate_change_per_level\":1,\"max_abs_leafnode_pred\":1.7976931348623157e+308,\"pred_noise_bandwidth\":0,\"calibrate_model\":false,\"grid_id\":\"grid-09a4f829-e354-4e93-8812-334e8b45b782\",\"hyper_parameters\":{\"learn_rate\":[\"0.01\"]},\"search_criteria\":{\"strategy\":\"Cartesian\"}}"
+    },
+    {
+      "type": "cs",
+      "input": "getGrid \"grid-09a4f829-e354-4e93-8812-334e8b45b782\""
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"grid-09a4f829-e354-4e93-8812-334e8b45b782_model_1\""
+    },
+    {
+      "type": "cs",
+      "input": "predict model: \"grid-09a4f829-e354-4e93-8812-334e8b45b782_model_1\""
+    },
+    {
+      "type": "cs",
+      "input": "predict model: \"grid-09a4f829-e354-4e93-8812-334e8b45b782_model_1\", frame: \"Yes_Bank_Test.hex\", predictions_frame: \"prediction-fe6d9668-57ae-4d69-a72d-eb6635c7b37b\""
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"prediction-fe6d9668-57ae-4d69-a72d-eb6635c7b37b\""
+    }
+  ]
+}
