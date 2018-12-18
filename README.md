@@ -7,3 +7,5 @@ Outcome is either yes or no which has to be predicted through given data for fea
 These features include Customer age, contact, job description, account balance, etc.
 
 https://skillenza.com/challenge/yb-ml-datathon
+
+Live
