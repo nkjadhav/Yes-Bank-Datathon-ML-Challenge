@@ -8,4 +8,4 @@ These features include Customer age, contact, job description, account balance, 
 
 https://skillenza.com/challenge/yb-ml-datathon
 
-Live
+Next - Live Challenge at Mumbai
